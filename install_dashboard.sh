@@ -7,6 +7,7 @@ USER_PROFILE="$HOME/.profile"
 
 # Главное меню действий
 show_menu() {
+    clear
     echo ""
     echo "*ENTWARE Router Management*"
     echo ""
