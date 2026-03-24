@@ -7,7 +7,6 @@ USER_PROFILE="$HOME/.profile"
 
 # Главное меню действий
 show_menu() {
-    printf "\033[2J\033[H"
     echo ""
     echo "*ENTWARE Router Management*"
     echo ""
@@ -70,6 +69,7 @@ perform_removal() {
     }
 
 # Основной цикл обработки
+printf "\033[2J\033[H" #очистка перед первым запуском
 main_loop() {
     while :; do
         show_menu
