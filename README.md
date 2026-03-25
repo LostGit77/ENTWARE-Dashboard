@@ -73,7 +73,7 @@ curl -L -s "https://raw.githubusercontent.com/LostGit77/ENTWARE-Dashboard/refs/h
 
 install neofit - # Установка neofit
 
-install x-ui - # Установка x-ui
+install x-ui - # Установка x-ui на роутер
 
 update - # Обновление всех пакетов и дашборда
 
