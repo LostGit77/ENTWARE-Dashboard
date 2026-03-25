@@ -83,8 +83,10 @@ remove hrneo - # Удаление hrneo
 ## 📸 Скриншоты
 
 ### Главный экран (banner)
-<p align="center">
-  <img src="screenshots/banner.png" width="350">
-</p>
-
+<table align="center" cellspacing="40">
+  <tr>
+    <td><img src="screenshots/banner1.png" width="300"></td>
+    <td><img src="screenshots/banner2.png" width="300"></td>
+  </tr>
+</table>
 
