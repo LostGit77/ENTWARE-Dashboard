@@ -530,6 +530,7 @@ case "$CMD_NAME" in
     echo -e "  • Полезные скрипты: https://www.pegakmop.site"
 	echo -e "  • AWG Manager.....: https://github.com/hoaxisr/awg-manager"
 	echo -e "  • NFQWS2..........: https://github.com/nfqws/nfqws2-keenetic"
+	echo -e "  • NFQWS-WEB.......: https://github.com/nfqws/nfqws-keenetic-web"
 	echo -e "  • B4..............: https://github.com/DanielLavrushin/b4"
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     exit 0
