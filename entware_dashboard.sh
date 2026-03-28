@@ -908,7 +908,7 @@ printf "${CLR_MAGENTA}   ➤  Entware Диск...............:${CLR_RESET} %s (L
 printf "\n${CLR_BLACK}Основано на идее и некоторых элементах скрипта custom-banner от @pegakmop${CLR_RESET}\n"
 printf "${CLR_BLACK}Полезные скрипты: https://www.pegakmop.site${CLR_RESET}\n"
 # ===== Проверка основных сервисов =====
-SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle awg-manager nfqws nfqws2 b4"
+SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle awg-manager nfqws2 b4"
 
 printf "\n${CLR_WHITE}\e[1m✅ Запущенные сервисы:\e[0m${CLR_RESET}\n"
 for SVC in $SERVICES_MAIN; do
@@ -939,14 +939,6 @@ for SVC in $SERVICES_MAIN; do
 		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
-
-	"nfqws")
-	  if pidof nfqws >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
-	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
-	  fi
-	  ;;	  
 
 	"nfqws2")
 	  if pidof nfqws2 >/dev/null 2>&1; then
