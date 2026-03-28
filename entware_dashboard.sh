@@ -707,6 +707,9 @@ case "$CMD_NAME" in
 		
 		  opkg remove --autoremove nfqws2-keenetic 2>&1 | sed 's/^/⟫ /'
 		  opkg remove --autoremove nfqws-keenetic-web 2>&1 | sed 's/^/⟫ /'
+
+		  echo -e "\033[1;33m→ Удаление конфигурационных файлов...\033[0m"
+		  rm -rf /opt/etc/nfqws2
 		
 		  echo -e "\n\033[1;32m✅ nfqws2 полностью удалён!\033[0m"
 		  ;;
