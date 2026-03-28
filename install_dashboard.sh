@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Конфигурационные параметры
-REMOTE_BANNER_SOURCE="https://raw.githubusercontent.com/LostGit77/ENTWARE-Dashboard/refs/heads/main/entware_dashboard.sh"
+REMOTE_BANNER_SOURCE="https://raw.githubusercontent.com/LostGit77/ENTWARE-Dashboard/refs/heads/dev/entware_dashboard.sh"
 INSTALL_LOCATION="/opt/etc/entware_dashboard.sh"
 USER_PROFILE="$HOME/.profile"
 
