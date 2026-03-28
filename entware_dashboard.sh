@@ -904,7 +904,7 @@ for SVC in $SERVICES_MAIN; do
 	  ;;
 
 	"nfqws2")
-	  if pidof nfqws >/dev/null 2>&1; then
+	  if pidof nfqws2 >/dev/null 2>&1; then
 	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
 	  else
 	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
