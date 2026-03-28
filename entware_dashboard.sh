@@ -910,8 +910,10 @@ printf "${CLR_BLUE}   ➤  Температура WiFi 5G........:${CLR_RESET} %
 printf "${CLR_MAGENTA}   ➤  Диск (/opt)................:${CLR_RESET} %s\n" "$DISK_INFO"
 printf "${CLR_MAGENTA}   ➤  Оперативная память.........:${CLR_RESET} %s\n" "$RAM"
 printf "${CLR_MAGENTA}   ➤  Entware Диск...............:${CLR_RESET} %s (Label: %s)\n" "$ENTWARE_DEVICE" "$ENTWARE_LABEL"
+
 printf "\n${CLR_BLACK}Основано на идее и некоторых элементах скрипта custom-banner от @pegakmop${CLR_RESET}\n"
 printf "${CLR_BLACK}Полезные скрипты: https://www.pegakmop.site${CLR_RESET}\n"
+
 # ===== Проверка основных сервисов =====
 SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle awg-manager nfqws2 b4"
 
@@ -923,23 +925,37 @@ for SVC in $SERVICES_MAIN; do
   if opkg list-installed | grep -q "^${PKG} "; then
     # Проверяем запущен ли процесс
     case "$SVC" in
-      "hrweb")
-        if pidof hrneo >/dev/null 2>&1 && pidof hrweb >/dev/null 2>&1; then
-          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
-        else
-          printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
-        fi
-        ;;
-      "magitrickle")
+	"neofit")
+	  if pidof neofit >/dev/null 2>&1; then
+		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:92)\n" "$SVC" "$ROUTER_IP"
+	  else
+		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	  fi
+	  ;;
+	"x-ui")
+	  if pidof x-ui >/dev/null 2>&1; then
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:2053)\n" "$SVC" "$ROUTER_IP"
+	  else
+	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	  fi
+	  ;;
+	 "hrweb")
+		if pidof hrneo >/dev/null 2>&1 && pidof hrweb >/dev/null 2>&1; then
+		  printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:2000)\n" "$SVC" "$ROUTER_IP"
+		else
+		  printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+		fi
+		;;
+     "magitrickle")
         if pidof magitrickled >/dev/null 2>&1; then
-          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:8080)\n" "$SVC" "$ROUTER_IP"
         else
           printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
         fi
         ;;
 	"awg-manager")
 	  if pidof awg-manager >/dev/null 2>&1; then
-		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:3000)\n" "$SVC" "$ROUTER_IP"
 	  else
 		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
 	  fi
@@ -947,7 +963,14 @@ for SVC in $SERVICES_MAIN; do
 
 	"nfqws2")
 	  if pidof nfqws2 >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:90)\n" "$SVC" "$ROUTER_IP"
+	  else
+	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	  fi
+	  ;;
+	"b4")
+	  if pidof b4 >/dev/null 2>&1; then
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:7000)\n" "$SVC" "$ROUTER_IP"
 	  else
 	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
 	  fi
@@ -968,7 +991,7 @@ done
 
 # ===== Проверка proxy-сервисов (xray/sing-box) =====
 printf "\n${CLR_WHITE}\e[1m✅ Прокси-сервисы:\e[0m${CLR_RESET}\n"
-for SVC in xray sing-box; do
+for SVC in xray sing-box mihomo; do
   if pidof "$SVC" >/dev/null 2>&1; then
     printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
   else
