@@ -380,26 +380,49 @@ case "$CMD_NAME" in
 	    exit 0
 	  fi
 	
-	  if ! confirm "Вы хотите установить nfqws2?" "y"; then
+	  if ! confirm "Вы хотите установить nfqws2 (с web интерфейсом)?" "y"; then
 	    echo -e "\n\033[1;33m⚠️  Установка отменена!\033[0m"
 	    exit 0
 	  fi
 	
 	  echo -e "\033[1;32m🚀 Установка nfqws2...\033[0m"
 	
-	  opkg remove nfqws-keenetic-web nfqws-keenetic >/dev/null 2>&1
+	  # 🔴 Удаляем старую версию если есть
+	  if is_installed "nfqws-keenetic" || is_installed "nfqws-keenetic-web"; then
+	    echo -e "\033[1;33m→ Найдена старая версия nfqws, удаляем...\033[0m"
+	    opkg remove nfqws-keenetic-web nfqws-keenetic >/dev/null 2>&1
+	  fi
 	
+	  # зависимости
+	  echo -e "\033[1;33m→ Установка зависимостей...\033[0m"
 	  opkg update
 	  opkg install ca-certificates wget-ssl
 	  opkg remove wget-nossl >/dev/null 2>&1
 	
+	  # репозиторий nfqws2
+	  echo -e "\033[1;33m→ Добавление репозитория nfqws2...\033[0m"
 	  mkdir -p /opt/etc/opkg
 	  echo "src/gz nfqws2-keenetic https://nfqws.github.io/nfqws2-keenetic/all" > /opt/etc/opkg/nfqws2-keenetic.conf
 	
-	  opkg update
-	  opkg install nfqws2-keenetic
+	  # репозиторий web
+	  echo -e "\033[1;33m→ Добавление репозитория web...\033[0m"
+	  echo "src/gz nfqws-keenetic-web https://nfqws.github.io/nfqws-keenetic-web/all" > /opt/etc/opkg/nfqws-keenetic-web.conf
 	
-	  echo -e "\n\033[1;32m✅ nfqws2 установлен!\033[0m"
+	  # установка
+	  echo -e "\033[1;33m→ Установка nfqws2...\033[0m"
+	  opkg update
+	  if ! opkg install nfqws2-keenetic 2>&1 | sed 's/^/⟫ /'; then
+	    echo -e "\n\033[1;31m❌ Ошибка установки nfqws2!\033[0m"
+	    exit 1
+	  fi
+	
+	  echo -e "\033[1;33m→ Установка web интерфейса...\033[0m"
+	  if ! opkg install nfqws-keenetic-web 2>&1 | sed 's/^/⟫ /'; then
+	    echo -e "\n\033[1;31m❌ Ошибка установки web интерфейса!\033[0m"
+	    exit 1
+	  fi
+	
+	  echo -e "\n\033[1;32m✅ nfqws2 + web установлен!\033[0m"
 	  ;;
 
 	b4)
@@ -669,8 +692,22 @@ case "$CMD_NAME" in
 		  ;;
 		
 		nfqws2)
-		  opkg remove --autoremove nfqws2-keenetic
-		  echo "Удалён nfqws2"
+		  if ! is_installed "nfqws2-keenetic" && ! is_installed "nfqws-keenetic-web"; then
+			echo -e "\n\033[1;33m⚠️  nfqws2 не установлен!\033[0m"
+			exit 0
+		  fi
+		
+		  if ! confirm "Вы хотите удалить nfqws2 и web интерфейс?" "n"; then
+			echo -e "\n\033[1;33m⚠️  Удаление отменено!\033[0m"
+			exit 0
+		  fi
+		
+		  echo -e "\033[1;31m🗑️  Удаление nfqws2...\033[0m"
+		
+		  opkg remove --autoremove nfqws2-keenetic 2>&1 | sed 's/^/⟫ /'
+		  opkg remove --autoremove nfqws-keenetic-web 2>&1 | sed 's/^/⟫ /'
+		
+		  echo -e "\n\033[1;32m✅ nfqws2 полностью удалён!\033[0m"
 		  ;;
 		
 		b4)
@@ -902,6 +939,14 @@ for SVC in $SERVICES_MAIN; do
 		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
+
+	"nfqws")
+	  if pidof nfqws >/dev/null 2>&1; then
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+	  else
+	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	  fi
+	  ;;	  
 
 	"nfqws2")
 	  if pidof nfqws2 >/dev/null 2>&1; then
