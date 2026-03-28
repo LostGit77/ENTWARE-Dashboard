@@ -876,6 +876,7 @@ fi
 get_package() {
   case "$1" in
     "x-ui") echo "3x-ui" ;;
+	"nfqws2") echo "nfqws2-keenetic" ;;
     *) echo "$1" ;;
   esac
 }
