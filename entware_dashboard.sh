@@ -5,7 +5,7 @@ SCRIPT_PATH="/opt/etc/entware_dashboard.sh"
 INSTALL_PATH="/opt/bin/install"
 UPDATE_PATH="/opt/bin/update"
 REMOVE_PATH="/opt/bin/remove"
-MANAGER_PATH="/opt/bin/manager"
+MANAGER_PATH="/opt/bin/manager"		
 BANNER_PATH="/opt/bin/banner"
 LINK_PATH="/opt/bin/link"
 HELP_PATH="/opt/bin/help"
@@ -377,7 +377,7 @@ case "$CMD_NAME" in
 
     # Обновление дашборда (ТИХО, кроме начального и конечного сообщений)
     echo -e "\n\033[1;33m🔄 Обновление Dashboard Script через установщик...\033[0m"
-    curl -L -s "https://raw.githubusercontent.com/LostGit77/ENTWARE-Dashboard/refs/heads/main/install_dashboard.sh" > /tmp/banner.sh
+    curl -L -s "https://raw.githubusercontent.com/LostGit77/ENTWARE-Dashboard/refs/heads/dev/install_dashboard.sh" > /tmp/banner.sh
     if [ ! -s /tmp/banner.sh ]; then
       echo -e "\n\033[1;31m❌ Не удалось загрузить установочный скрипт!\033[0m"
       rm -f /tmp/banner.sh
