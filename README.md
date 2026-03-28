@@ -1,4 +1,4 @@
-# 🌐 Entware Dashboard для Keenetic
+# 🌐 DEV-Entware Dashboard для Keenetic
 
 ![Platform](https://img.shields.io/badge/platform-Entware%20%7C%20Keenetic-green)
 
