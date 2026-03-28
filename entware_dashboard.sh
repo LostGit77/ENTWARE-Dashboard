@@ -348,7 +348,81 @@ case "$CMD_NAME" in
         echo -e "\n\033[1;33m⚠️  Установка завершена, но сервис не запущен.\033[0m"
         echo -e "\033[1;37m   Попробуйте запустить вручную: cat /opt/var/log/magitrickle.log\033[0m"
       fi
-      ;;		
+      ;;
+
+	awg-manager)
+	  if is_installed "awg-manager"; then
+	    echo -e "\n\033[1;33m⚠️  awg-manager уже установлен!\033[0m"
+	    exit 0
+	  fi
+	
+	  if ! confirm "Вы хотите установить awg-manager?" "y"; then
+	    echo -e "\n\033[1;33m⚠️  Установка отменена!\033[0m"
+	    exit 0
+	  fi
+	
+	  echo -e "\033[1;32m🚀 Установка awg-manager...\033[0m"
+	
+	  opkg update
+	  opkg install curl
+	
+	  if ! curl -sL https://raw.githubusercontent.com/hoaxisr/awg-manager/main/scripts/install.sh | sh; then
+	    echo -e "\n\033[1;31m❌ Ошибка установки awg-manager!\033[0m"
+	    exit 1
+	  fi
+	
+	  echo -e "\n\033[1;32m✅ awg-manager установлен!\033[0m"
+	  ;;
+
+	nfqws2)
+	  if is_installed "nfqws2-keenetic"; then
+	    echo -e "\n\033[1;33m⚠️  nfqws2 уже установлен!\033[0m"
+	    exit 0
+	  fi
+	
+	  if ! confirm "Вы хотите установить nfqws2?" "y"; then
+	    echo -e "\n\033[1;33m⚠️  Установка отменена!\033[0m"
+	    exit 0
+	  fi
+	
+	  echo -e "\033[1;32m🚀 Установка nfqws2...\033[0m"
+	
+	  opkg remove nfqws-keenetic-web nfqws-keenetic >/dev/null 2>&1
+	
+	  opkg update
+	  opkg install ca-certificates wget-ssl
+	  opkg remove wget-nossl >/dev/null 2>&1
+	
+	  mkdir -p /opt/etc/opkg
+	  echo "src/gz nfqws2-keenetic https://nfqws.github.io/nfqws2-keenetic/all" > /opt/etc/opkg/nfqws2-keenetic.conf
+	
+	  opkg update
+	  opkg install nfqws2-keenetic
+	
+	  echo -e "\n\033[1;32m✅ nfqws2 установлен!\033[0m"
+	  ;;
+
+	b4)
+	  if is_installed "b4"; then
+	    echo -e "\n\033[1;33m⚠️  b4 уже установлен!\033[0m"
+	    exit 0
+	  fi
+	
+	  if ! confirm "Вы хотите установить b4?" "y"; then
+	    echo -e "\n\033[1;33m⚠️  Установка отменена!\033[0m"
+	    exit 0
+	  fi
+	
+	  echo -e "\033[1;32m🚀 Установка b4...\033[0m"
+	
+	  if ! wget -qO- https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh | sh; then
+	    echo -e "\n\033[1;31m❌ Ошибка установки b4!\033[0m"
+	    exit 1
+	  fi
+	
+	  echo -e "\n\033[1;32m✅ b4 установлен!\033[0m"
+	  ;;
+	  
     *)
       echo "Error: Unknown service '$1'"
       echo "Usage: install [neofit|x-ui|hrneo|hrweb|magitrickle]"
@@ -440,9 +514,11 @@ case "$CMD_NAME" in
     echo -e "📚 СПРАВОЧНАЯ ИНФОРМАЦИЯ:"
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo -e "  • install [сервис]  - Установка сервиса: neofit, x-ui, hrneo, magitrickle"
+	echo -e "  						 awg-manager, nfqws2, b4"
     echo -e "                        Пример: install neofit"
     echo -e ""
     echo -e "  • remove [сервис]   - Удаление сервиса: neofit, x-ui, hrneo, magitrickle"
+	echo -e "  						 awg-manager, nfqws2, b4"
     echo -e "                        Пример: remove neofit"
     echo -e ""
     echo -e "  • update            - Обновление всех пакетов Entware (opkg update, opkg upgrade)"
@@ -581,6 +657,22 @@ case "$CMD_NAME" in
 		  rm -f /opt/etc/opkg/magitrickle.conf 2>&1 | sed 's/^/⟫ /'
 		  
 		  echo -e "\n\033[1;32m✅ magitrickle полностью удалён!\033[0m"
+		  ;;
+
+		awg-manager)
+		  opkg remove awg-manager
+		  rm -rf /opt/etc/awg-manager
+		  echo "Удалён awg-manager"
+		  ;;
+		
+		nfqws2)
+		  opkg remove --autoremove nfqws2-keenetic
+		  echo "Удалён nfqws2"
+		  ;;
+		
+		b4)
+		  curl -fsSL https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh | sh -s -- --remove
+		  echo "Удалён b4"
 		  ;;
 		  
 		*)
@@ -776,7 +868,7 @@ printf "${CLR_MAGENTA}   ➤  Entware Диск...............:${CLR_RESET} %s (L
 printf "\n${CLR_BLACK}Основано на идее и некоторых элементах скрипта custom-banner от @pegakmop${CLR_RESET}\n"
 printf "${CLR_BLACK}Полезные скрипты: https://www.pegakmop.site${CLR_RESET}\n"
 # ===== Проверка основных сервисов =====
-SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle"
+SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle awg-manager nfqws2 b4"
 
 printf "\n${CLR_WHITE}\e[1m✅ Запущенные сервисы:\e[0m${CLR_RESET}\n"
 for SVC in $SERVICES_MAIN; do
@@ -800,6 +892,22 @@ for SVC in $SERVICES_MAIN; do
           printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
         fi
         ;;
+	"awg-manager")
+	  if pidof awg-manager >/dev/null 2>&1; then
+		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+	  else
+		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	  fi
+	  ;;
+
+	"nfqws2")
+	  if pidof nfqws >/dev/null 2>&1; then
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+	  else
+	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	  fi
+	  ;;
+		
       *)
         if pidof "$SVC" >/dev/null 2>&1; then
           printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
