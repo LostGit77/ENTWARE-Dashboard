@@ -916,6 +916,7 @@ printf "${CLR_BLACK}Полезные скрипты: https://www.pegakmop.site${
 
 # ===== Проверка основных сервисов =====
 SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle awg-manager nfqws2 b4"
+ROUTER_IP="$(get_router_ip)"
 
 printf "\n${CLR_WHITE}\e[1m✅ Запущенные сервисы:\e[0m${CLR_RESET}\n"
 for SVC in $SERVICES_MAIN; do
