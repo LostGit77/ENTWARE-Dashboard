@@ -1014,17 +1014,25 @@ echo -e "$OTHER_SERVICES"
 PROXY_RUNNING=""
 PROXY_OTHER=""
 
+append_proxy_running() {
+  PROXY_RUNNING="${PROXY_RUNNING}   $1\n"
+}
+
+append_proxy_other() {
+  PROXY_OTHER="${PROXY_OTHER}   $1\n"
+}
+
 printf "\n${CLR_WHITE}\e[1m✅ Прокси-сервисы:\e[0m${CLR_RESET}\n"
 for SVC in xray sing-box mihomo; do
   if pidof "$SVC" >/dev/null 2>&1; then
-    PROXY_RUNNING="$PROXY_RUNNING$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC")"
+    append_proxy_running "$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC")"
   else
-    PROXY_OTHER="$PROXY_OTHER$(printf "   🟥 %-12s ${CLR_RED}остановлен${CLR_RESET}\n" "$SVC")"
+    append_proxy_other "$(printf "   🟥 %-12s ${CLR_RED}остановлен${CLR_RESET}\n" "$SVC")"
   fi
 done
 
-echo -e "%s" "$PROXY_RUNNING"
-echo -e "%s" "$PROXY_OTHER"
+echo -e "$PROXY_RUNNING"
+echo -e "$PROXY_OTHER"
 
 printf "\n${CLR_WHITE}\e[1m🔄 Доступно обновлений:\e[0m${CLR_RESET} %s\n" "$UPGRADEABLE_COUNT"
 
