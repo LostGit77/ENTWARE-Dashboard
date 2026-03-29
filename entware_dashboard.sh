@@ -900,7 +900,8 @@ for SVC in $SERVICES_MAIN; do
   PKG=$(get_package "$SVC")
 
   # Проверяем установлен ли пакет
-  if { [ "$SVC" = "b4" ] && [ -f "/opt/bin/b4" ]; } || opkg list-installed | grep -q "^${PKG} "; then
+  if { [ "$SVC" = "b4" ] && { [ -f "/opt/sbin/b4" ] || [ -f "/opt/bin/b4" ] || [ -d "/opt/etc/b4" ]; }; } \
+   || opkg list-installed | grep -q "^${PKG} "; then
     # Проверяем запущен ли процесс
     case "$SVC" in
 	"neofit")
