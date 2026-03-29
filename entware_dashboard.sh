@@ -535,7 +535,7 @@ case "$CMD_NAME" in
     echo -e "  • neofit..........: https://github.com/pegakmop/neofit"
     echo -e "  • hrneo/hrweb.....: https://github.com/Ground-Zerro/HydraRoute/tree/main/Neo"
     echo -e "  • magitrickle.....: https://gitlab.com/magitrickle/magitrickle"
-	echo -e "                      https://magitrickle.dev/docs/getting-started/entware/"
+	echo -e "  • magitrickle сайт: https://magitrickle.dev/docs/getting-started/entware/"
     echo -e "  • Полезные скрипты: https://www.pegakmop.site"
 	echo -e "  • AWG Manager.....: https://github.com/hoaxisr/awg-manager"
 	echo -e "  • NFQWS2..........: https://github.com/nfqws/nfqws2-keenetic"
