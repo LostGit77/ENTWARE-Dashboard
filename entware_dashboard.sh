@@ -441,7 +441,7 @@ case "$CMD_NAME" in
 	
 	  echo -e "\033[1;32m🚀 Установка b4...\033[0m"
 	
-	  if ! wget -qO- https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh | sh; then
+	  if ! curl -fsSL https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh | sh; then
 	    echo -e "\n\033[1;31m❌ Ошибка установки b4!\033[0m"
 	    exit 1
 	  fi
@@ -528,7 +528,7 @@ case "$CMD_NAME" in
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo -e "  • neofit..........: https://github.com/pegakmop/neofit"
     echo -e "  • hrneo/hrweb.....: https://github.com/Ground-Zerro/HydraRoute/tree/main/Neo"
-    echo -e "  • magitrickle.....: https://gitlab.com/magitrickle/magitrickle${CLR_RESET}"
+    echo -e "  • magitrickle.....: https://gitlab.com/magitrickle/magitrickle"
 	echo -e "                      https://magitrickle.dev/docs/getting-started/entware/"
     echo -e "  • Полезные скрипты: https://www.pegakmop.site"
 	echo -e "  • AWG Manager.....: https://github.com/hoaxisr/awg-manager"
@@ -929,7 +929,7 @@ for SVC in $SERVICES_MAIN; do
   PKG=$(get_package "$SVC")
 
   # Проверяем установлен ли пакет
-  if opkg list-installed | grep -q "^${PKG} "; then
+  if [ "$SVC" = "b4" ] || opkg list-installed | grep -q "^${PKG} "; then
     # Проверяем запущен ли процесс
     case "$SVC" in
 	"neofit")
@@ -976,7 +976,7 @@ for SVC in $SERVICES_MAIN; do
 	  fi
 	  ;;
 	"b4")
-	  if pidof b4 >/dev/null 2>&1; then
+	  if ps | grep -q "[b]4"; then
 	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:7000\n" "$SVC" "$ROUTER_IP"
 	  else
 	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
