@@ -393,7 +393,7 @@ case "$CMD_NAME" in
 	  # 🔴 Удаляем старую версию если есть
 	  if is_installed "nfqws-keenetic" || is_installed "nfqws-keenetic-web"; then
 	    echo -e "\033[1;33m→ Найдена старая версия nfqws, удаляем...\033[0m"
-	    opkg remove nfqws-keenetic-web nfqws-keenetic 2>&1 | sed 's/^/⟫ /'
+	    printf "y\n" | opkg remove nfqws-keenetic-web nfqws-keenetic
 	  fi
 	
 	  # зависимости
@@ -429,7 +429,7 @@ case "$CMD_NAME" in
 	  ;;
 
 	b4)
-	  if is_installed "b4"; then
+	  if [ -f "/opt/bin/b4" ] || [ -d "/opt/etc/b4" ]; then
 	    echo -e "\n\033[1;33m⚠️  b4 уже установлен!\033[0m"
 	    exit 0
 	  fi
@@ -441,17 +441,23 @@ case "$CMD_NAME" in
 	
 	  echo -e "\033[1;32m🚀 Установка b4...\033[0m"
 	
-	  if ! curl -fsSL https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh | sh; then
-	    echo -e "\n\033[1;31m❌ Ошибка установки b4!\033[0m"
-	    exit 1
-	  fi
+		if command -v curl >/dev/null 2>&1; then
+		  INSTALL_CMD="curl -fsSL https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh"
+		else
+		  INSTALL_CMD="wget -qO- https://raw.githubusercontent.com/DanielLavrushin/b4/main/install.sh"
+		fi
+		
+		if ! eval "$INSTALL_CMD" | sh; then
+		  echo -e "\n\033[1;31m❌ Ошибка установки b4!\033[0m"
+		  exit 1
+		fi
 	
 	  echo -e "\n\033[1;32m✅ b4 установлен!\033[0m"
 	  ;;
 	  
     *)
       echo "Error: Unknown service '$1'"
-      echo "Usage: install [neofit|x-ui|hrneo|hrweb|magitrickle]"
+      echo "Usage: install [neofit|x-ui|hrneo|hrweb|magitrickle|awg-manager|nfqws2|b4]"
       exit 1
       ;;
   esac
