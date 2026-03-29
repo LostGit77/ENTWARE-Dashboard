@@ -998,8 +998,8 @@ for SVC in $SERVICES_MAIN; do
   fi
 done
 
-printf "%s" "$RUNNING_SERVICES"
-printf "%s" "$OTHER_SERVICES"
+echo -e "%s" "$RUNNING_SERVICES"
+echo -e "%s" "$OTHER_SERVICES"
 
 # ===== Проверка proxy-сервисов (xray/sing-box) =====
 PROXY_RUNNING=""
@@ -1014,8 +1014,8 @@ for SVC in xray sing-box mihomo; do
   fi
 done
 
-printf "%s" "$PROXY_RUNNING"
-printf "%s" "$PROXY_OTHER"
+echo -e "%s" "$PROXY_RUNNING"
+echo -e "%s" "$PROXY_OTHER"
 
 printf "\n${CLR_WHITE}\e[1m🔄 Доступно обновлений:\e[0m${CLR_RESET} %s\n" "$UPGRADEABLE_COUNT"
 
