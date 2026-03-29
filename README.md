@@ -84,7 +84,7 @@ remove hrneo - # Удаление hrneo
 
 ### Главный экран (banner)
 <p align="center">
-  <img src="screenshots/banner3.png" width="300" style="margin-right: 10px;">
-  <img src="screenshots/banner4.png" width="300">
+  <img src="screenshots/banner5.png" width="300" style="margin-right: 10px;">
+  <img src="screenshots/banner6.png" width="300">
 </p>
 
