@@ -1007,8 +1007,8 @@ for SVC in $SERVICES_MAIN; do
   fi
 done
 
-echo -e "%s" "$RUNNING_SERVICES"
-echo -e "%s" "$OTHER_SERVICES"
+echo -e "$RUNNING_SERVICES"
+echo -e "$OTHER_SERVICES"
 
 # ===== Проверка proxy-сервисов (xray/sing-box) =====
 PROXY_RUNNING=""
