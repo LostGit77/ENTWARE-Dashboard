@@ -833,39 +833,6 @@ if [ $? -ne 0 ] || [ -z "$CPU_CORES_COUNT" ] || [ "$CPU_CORES_COUNT" = "0" ]; th
   CPU_CORES_COUNT="?"
 fi
 
-# ===== Температура Wi-Fi =====
-if ndmc -c "show interface WifiMaster0" 2>/dev/null | grep -q "temperature"; then
-    WIFI_24G_TEMP=$(ndmc -c "show interface WifiMaster0" 2>/dev/null | awk -F": " '/temperature/ {print $2}')
-    if [ -n "$WIFI_24G_TEMP" ]; then
-        WIFI_TEMPERATURE_24G="${WIFI_24G_TEMP}°C"
-    else
-        WIFI_TEMPERATURE_24G="Не определено"
-    fi
-else
-    WIFI_TEMPERATURE_24G="Не определено"
-fi
-
-if ndmc -c "show interface WifiMaster1" 2>/dev/null | grep -q "temperature"; then
-    WIFI_5G_TEMP=$(ndmc -c "show interface WifiMaster1" 2>/dev/null | awk -F": " '/temperature/ {print $2}')
-    if [ -n "$WIFI_5G_TEMP" ]; then
-        WIFI_TEMPERATURE_5G="${WIFI_5G_TEMP}°C"
-    else
-        WIFI_TEMPERATURE_5G="Не определено"
-    fi
-else
-    WIFI_TEMPERATURE_5G="Не определено"
-fi
-
-# Объединяем значения в одну переменную (если нужно общее значение)
-if [ "$WIFI_TEMPERATURE_24G" != "Не определено" ] && [ "$WIFI_TEMPERATURE_5G" != "Не определено" ]; then
-    WIFI_TEMPERATURE="2.4G: ${WIFI_TEMPERATURE_24G}, 5G: ${WIFI_TEMPERATURE_5G}"
-elif [ "$WIFI_TEMPERATURE_24G" != "Не определено" ]; then
-    WIFI_TEMPERATURE="$WIFI_TEMPERATURE_24G"
-elif [ "$WIFI_TEMPERATURE_5G" != "Не определено" ]; then
-    WIFI_TEMPERATURE="$WIFI_TEMPERATURE_5G"
-else
-    WIFI_TEMPERATURE="Не определено"
-fi
 
 # ===== Оперативная память =====
 RAM="$(
@@ -917,8 +884,6 @@ printf "${CLR_GREEN}   ➤  CPU........................:${CLR_RESET} %s\n" "$CPU
 printf "${CLR_GREEN}   ➤  Нагрузка на CPU............:${CLR_RESET} %s\n" "$SYSTEM_LOAD"
 printf "${CLR_GREEN}   ➤  Колличество ядер...........:${CLR_RESET} %s\n" "$CPU_CORES_COUNT"
 printf "${CLR_GREEN}   ➤  Температура CPU............:${CLR_RESET} %s\n" "$CPU_TEMPERATURE"
-printf "${CLR_BLUE}   ➤  Температура WiFi 2.4G......:${CLR_RESET} %s\n" "$WIFI_TEMPERATURE_24G"
-printf "${CLR_BLUE}   ➤  Температура WiFi 5G........:${CLR_RESET} %s\n" "$WIFI_TEMPERATURE_5G"
 printf "${CLR_MAGENTA}   ➤  Диск (/opt)................:${CLR_RESET} %s\n" "$DISK_INFO"
 printf "${CLR_MAGENTA}   ➤  Оперативная память.........:${CLR_RESET} %s\n" "$RAM"
 printf "${CLR_MAGENTA}   ➤  Entware Диск...............:${CLR_RESET} %s (Label: %s)\n" "$ENTWARE_DEVICE" "$ENTWARE_LABEL"
