@@ -928,52 +928,52 @@ for SVC in $SERVICES_MAIN; do
     case "$SVC" in
 	"neofit")
 	  if pidof neofit >/dev/null 2>&1; then
-		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:92)\n" "$SVC" "$ROUTER_IP"
+		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:92\n" "$SVC" "$ROUTER_IP"
 	  else
-		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+		printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
 	"x-ui")
 	  if pidof x-ui >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:2053)\n" "$SVC" "$ROUTER_IP"
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2053\n" "$SVC" "$ROUTER_IP"
 	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
 	 "hrweb")
 		if pidof hrneo >/dev/null 2>&1 && pidof hrweb >/dev/null 2>&1; then
-		  printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:2000)\n" "$SVC" "$ROUTER_IP"
+		  printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2000\n" "$SVC" "$ROUTER_IP"
 		else
-		  printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+		  printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 		fi
 		;;
      "magitrickle")
         if pidof magitrickled >/dev/null 2>&1; then
-          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:8080)\n" "$SVC" "$ROUTER_IP"
+          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:8080\n" "$SVC" "$ROUTER_IP"
         else
-          printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+          printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
         fi
         ;;
 	"awg-manager")
 	  if pidof awg-manager >/dev/null 2>&1; then
-		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:3000)\n" "$SVC" "$ROUTER_IP"
+		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:3000\n" "$SVC" "$ROUTER_IP"
 	  else
-		printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+		printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
 
 	"nfqws2")
 	  if pidof nfqws2 >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:90)\n" "$SVC" "$ROUTER_IP"
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:90\n" "$SVC" "$ROUTER_IP"
 	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
 	"b4")
 	  if pidof b4 >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} (http://%s:7000)\n" "$SVC" "$ROUTER_IP"
+	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:7000\n" "$SVC" "$ROUTER_IP"
 	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
 	  ;;
 		
@@ -981,7 +981,7 @@ for SVC in $SERVICES_MAIN; do
         if pidof "$SVC" >/dev/null 2>&1; then
           printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
         else
-          printf "   🟨 %-12s ${CLR_YELLOW}приостановлен${CLR_RESET}\n" "$SVC"
+          printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
         fi
         ;;
     esac
