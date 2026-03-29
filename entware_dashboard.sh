@@ -953,6 +953,7 @@ for SVC in $SERVICES_MAIN; do
 	  else
 	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
+	  fi
 	  ;;
 
       *)
