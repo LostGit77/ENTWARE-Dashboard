@@ -429,7 +429,7 @@ case "$CMD_NAME" in
 	  ;;
 
 	b4)
-	  if [ -f "/opt/bin/b4" ] || [ -d "/opt/etc/b4" ]; then
+	  if [ -f "/opt/sbin/b4" ] || [ -f "/opt/bin/b4" ] || [ -d "/opt/etc/b4" ]; then
 	    echo -e "\n\033[1;33m⚠️  b4 уже установлен!\033[0m"
 	    exit 0
 	  fi
@@ -947,7 +947,8 @@ for SVC in $SERVICES_MAIN; do
 	  fi
 	  ;;
 	"b4")
-	  if ps | grep -q "[b]4"; then
+	  if [ -f "/opt/sbin/b4" ] || [ -f "/opt/bin/b4" ] || [ -d "/opt/etc/b4" ]; then
+	    if ps | grep -q "[b]4"; then
 	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:7000\n" "$SVC" "$ROUTER_IP"
 	  else
 	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
