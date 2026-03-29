@@ -84,7 +84,10 @@ case "$CMD_NAME" in
   "install"|"custom-install")
     # Обработка установки сервисов
     if [ -z "$1" ]; then
-      echo "Usage: install [neofit|x-ui|hrneo|hrweb]"
+	  echo "❗ Укажите сервис для установки"
+	  echo "👉 Использование: install <сервис>"
+	  echo "📦 Доступные сервисы: neofit, x-ui, hrneo, magitrickle, awg-manager, nfqws2, b4"
+	  echo "💡 Пример: install neofit"
       exit 1
     fi
     
@@ -567,7 +570,10 @@ case "$CMD_NAME" in
 "remove"|"custom-remove")
     # Обработка удаления сервисов
     if [ -z "$1" ]; then
-      echo "Использование: remove [neofit|x-ui|hrneo|hrweb|magitrickle]"
+	  echo "❗ Укажите сервис для удаления"
+	  echo "👉 Использование: remove <сервис>"
+	  echo "📦 Доступные сервисы: neofit, x-ui, hrneo, magitrickle, awg-manager, nfqws2, b4"
+	  echo "💡 Пример: remove hrneo"
       exit 1
     fi
     
@@ -1022,8 +1028,8 @@ fi
 printf "\n${CLR_BLACK}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${CLR_RESET}\n"
 printf "                     ${CLR_BLACK}ПОЛЕЗНЫЕ КОМАНДЫ ДЛЯ УПРАВЛЕНИЯ${CLR_RESET}                         \n"
 printf "${CLR_BLACK}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${CLR_RESET}\n"
-printf " ${CLR_CYAN}🛠️  Установка сервисов........:${CLR_RESET} ${CLR_WHITE}install [neofit|x-ui|hrneo|magitrickle|awg-manager|nfqws2|b4]${CLR_RESET}\n"
-printf " ${CLR_YELLOW}🧹 Удаление сервисов.........:${CLR_RESET} ${CLR_WHITE}remove  [neofit|x-ui|hrneo|magitrickle|awg-manager|nfqws2|b4]${CLR_RESET}\n"
+printf " ${CLR_CYAN}🛠️  Установка сервисов........:${CLR_RESET} ${CLR_WHITE}install${CLR_RESET}\n"
+printf " ${CLR_YELLOW}🧹 Удаление сервисов.........:${CLR_RESET} ${CLR_WHITE}remove${CLR_RESET}\n"
 printf " ${CLR_GREEN}🔄 Обновление пакетов........:${CLR_RESET} ${CLR_WHITE}update${CLR_RESET}\n"
 printf " ${CLR_MAGENTA}💾 Менеджер дисков & backup..:${CLR_RESET} ${CLR_WHITE}manager${CLR_RESET}\n"
 printf " ${CLR_BLUE}🏠 Вернуться к баннеру.......:${CLR_RESET} ${CLR_WHITE}banner${CLR_RESET}\n"
