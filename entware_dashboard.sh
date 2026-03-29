@@ -923,6 +923,8 @@ printf "${CLR_BLACK}Полезные скрипты: https://www.pegakmop.site${
 # ===== Проверка основных сервисов =====
 SERVICES_MAIN="neofit x-ui hrneo hrweb magitrickle awg-manager nfqws2 b4"
 ROUTER_IP="$(get_router_ip)"
+RUNNING_SERVICES=""
+OTHER_SERVICES=""
 
 printf "\n${CLR_WHITE}\e[1m✅ Запущенные сервисы:\e[0m${CLR_RESET}\n"
 for SVC in $SERVICES_MAIN; do
@@ -934,77 +936,86 @@ for SVC in $SERVICES_MAIN; do
     case "$SVC" in
 	"neofit")
 	  if pidof neofit >/dev/null 2>&1; then
-		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:92\n" "$SVC" "$ROUTER_IP"
+		RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:92\n" "$SVC" "$ROUTER_IP")"
 	  else
-		printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+		OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
 	  fi
 	  ;;
 	"x-ui")
 	  if pidof x-ui >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2053\n" "$SVC" "$ROUTER_IP"
+	    RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2053\n" "$SVC" "$ROUTER_IP")"
 	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+	    OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
 	  fi
 	  ;;
 	 "hrweb")
 		if pidof hrneo >/dev/null 2>&1 && pidof hrweb >/dev/null 2>&1; then
-		  printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2000\n" "$SVC" "$ROUTER_IP"
+		  RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2000\n" "$SVC" "$ROUTER_IP")"
 		else
-		  printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+		  OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
 		fi
 		;;
      "magitrickle")
         if pidof magitrickled >/dev/null 2>&1; then
-          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:8080\n" "$SVC" "$ROUTER_IP"
+          RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:8080\n" "$SVC" "$ROUTER_IP")"
         else
-          printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+          OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
         fi
         ;;
 	"awg-manager")
 	  if pidof awg-manager >/dev/null 2>&1; then
-		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2222\n" "$SVC" "$ROUTER_IP"
+		RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2222\n" "$SVC" "$ROUTER_IP")"
 	  else
-		printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+		OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
 	  fi
 	  ;;
 
 	"nfqws2")
 	  if pidof nfqws2 >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:90\n" "$SVC" "$ROUTER_IP"
+	    RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:90\n" "$SVC" "$ROUTER_IP")"
 	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+	    OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
 	  fi
 	  ;;
 	"b4")
 	  if pidof b4 >/dev/null 2>&1; then
-	    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:7000\n" "$SVC" "$ROUTER_IP"
+	    RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:7000\n" "$SVC" "$ROUTER_IP")"
 	  else
-	    printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+	    OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
 	  fi
 	  ;;
 		
       *)
         if pidof "$SVC" >/dev/null 2>&1; then
-          printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+          RUNNING_SERVICES="$RUNNING_SERVICES$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC")"
         else
-          printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
+          OTHER_SERVICES="$OTHER_SERVICES$(printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC")"
         fi
         ;;
     esac
   else
-    printf "   ⬜ %-12s ${CLR_YELLOW}не установлен${CLR_RESET}\n" "$SVC"
+    OTHER_SERVICES="$OTHER_SERVICES$(printf "   ⬜ %-12s ${CLR_YELLOW}не установлен${CLR_RESET}\n" "$SVC")"
   fi
 done
 
+printf "%s" "$RUNNING_SERVICES"
+printf "%s" "$OTHER_SERVICES"
+
 # ===== Проверка proxy-сервисов (xray/sing-box) =====
+PROXY_RUNNING=""
+PROXY_OTHER=""
+
 printf "\n${CLR_WHITE}\e[1m✅ Прокси-сервисы:\e[0m${CLR_RESET}\n"
 for SVC in xray sing-box mihomo; do
   if pidof "$SVC" >/dev/null 2>&1; then
-    printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC"
+    PROXY_RUNNING="$PROXY_RUNNING$(printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET}\n" "$SVC")"
   else
-    printf "   🟥 %-12s ${CLR_RED}остановлен${CLR_RESET}\n" "$SVC"
+    PROXY_OTHER="$PROXY_OTHER$(printf "   🟥 %-12s ${CLR_RED}остановлен${CLR_RESET}\n" "$SVC")"
   fi
 done
+
+printf "%s" "$PROXY_RUNNING"
+printf "%s" "$PROXY_OTHER"
 
 printf "\n${CLR_WHITE}\e[1m🔄 Доступно обновлений:\e[0m${CLR_RESET} %s\n" "$UPGRADEABLE_COUNT"
 
