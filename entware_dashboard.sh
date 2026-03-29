@@ -393,7 +393,7 @@ case "$CMD_NAME" in
 	  # 🔴 Удаляем старую версию если есть
 	  if is_installed "nfqws-keenetic" || is_installed "nfqws-keenetic-web"; then
 	    echo -e "\033[1;33m→ Найдена старая версия nfqws, удаляем...\033[0m"
-	    opkg remove nfqws-keenetic-web nfqws-keenetic >/dev/null 2>&1
+	    opkg remove nfqws-keenetic-web nfqws-keenetic 2>&1 | sed 's/^/⟫ /'
 	  fi
 	
 	  # зависимости
@@ -711,8 +711,8 @@ case "$CMD_NAME" in
 		
 		  echo -e "\033[1;31m🗑️  Удаление nfqws2...\033[0m"
 		
-		  opkg remove --autoremove nfqws2-keenetic 2>&1 | sed 's/^/⟫ /'
-		  opkg remove --autoremove nfqws-keenetic-web 2>&1 | sed 's/^/⟫ /'
+		  printf "y\n" | opkg remove --autoremove nfqws2-keenetic
+		  printf "y\n" | opkg remove --autoremove nfqws-keenetic-web
 
 		  echo -e "\033[1;33m→ Удаление конфигурационных файлов...\033[0m"
 		  rm -rf /opt/etc/nfqws2
