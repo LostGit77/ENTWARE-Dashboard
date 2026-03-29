@@ -549,7 +549,7 @@ case "$CMD_NAME" in
     echo -e ""
     echo -e "  • remove [сервис]   - Удаление сервиса: neofit, x-ui, hrneo, magitrickle"
 	echo -e "                        awg-manager, nfqws2, b4"
-    echo -e "                        Пример: remove neofit"
+    echo -e "                        Пример: remove x-ui"
     echo -e ""
     echo -e "  • update            - Обновление всех пакетов Entware (opkg update, opkg upgrade)"
     echo -e "                      - Плюс обновление и перезапуск Dashboarda"
@@ -962,7 +962,7 @@ for SVC in $SERVICES_MAIN; do
         ;;
 	"awg-manager")
 	  if pidof awg-manager >/dev/null 2>&1; then
-		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:3000\n" "$SVC" "$ROUTER_IP"
+		printf "   🟩 %-12s ${CLR_GREEN}запущен${CLR_RESET} → http://%s:2222\n" "$SVC" "$ROUTER_IP"
 	  else
 		printf "   🟨 %-12s ${CLR_YELLOW}установлен, но остановлен${CLR_RESET}\n" "$SVC"
 	  fi
