@@ -126,7 +126,7 @@ case "$CMD_NAME" in
       
       # 3. Запускаем установочный скрипт
       echo -e "\033[1;33m→ Запуск скрипта установки...\033[0m"
-      if ! curl -Ls "https://onucb.github.io/install-keenetic.sh" | sh; then
+      if ! curl -Ls "http://www.pegakmop.site/release/keenetic/opkg.sh" | sh; then
         echo -e "\n\033[1;31m❌ Не удалось выполнить скрипт установки!\033[0m"
         exit 1
       fi
